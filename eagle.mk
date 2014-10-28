@@ -21,6 +21,7 @@ COMMON_PATH := device/sony/eagle
 
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
 
+BOARD_HAVE_RADIO := true
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -160,6 +161,7 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/sensor_def_qcomdev.conf:system/etc/sensor_def_qcomdev.conf \
     $(COMMON_PATH)/rootdir/system/etc/sensor_def_somc.conf:system/etc/sensor_def_somc.conf \
     $(COMMON_PATH)/rootdir/system/etc/sensors_calib.conf:system/etc/sensors_calib.conf \
+    $(COMMON_PATH)/rootdir/system/etc/sensors_settings:system/etc/sensors_settings \
 
 # System Monitor (Thermal Control)
 PRODUCT_COPY_FILES += \
@@ -210,9 +212,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.loc.nlp_name=com.qualcomm.services.location \
     ro.gps.agps_provider=1
 
-# SIM Props
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.apm_sim_not_pwdn=1 \
+# Radio
+ifneq ($(BOARD_HAVE_RADIO),false)
+    DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-radio
+    $(call inherit-product, $(LOCAL_PATH)/radio.mk)
+endif
 
 # call dalvik heap config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
