@@ -12,6 +12,7 @@ bin/hci_qcomm_init
 bin/hvdcp
 bin/irsc_util
 bin/led_service
+bin/memsicd
 bin/mm-pp-daemon
 bin/mm-qcamera-daemon
 bin/mpdecision
@@ -29,6 +30,7 @@ bin/rmt_storage
 bin/scd
 bin/scdnotifier
 bin/sct_service
+bin/sensors.qcom
 bin/suntrold
 bin/system_monitor
 bin/taimport
@@ -143,9 +145,11 @@ framework/qcnvitems.jar
 framework/qcrilhook.jar
 lib/egl/egl.cfg
 lib/egl/libGLES_android.so
-lib/hw/camera.msm8226.so
-lib/hw/lights.msm8226.so
+lib/hw/camera.msm8226.so:lib/hw/camera.vendor.msm8226.so
+lib/hw/lights.msm8226.so:lib/hw/lights.vendor.msm8226.so
 lib/hw/nfc_nci_pn547.msm8226.so
+lib/hw/sensors.msm8226.so
+lib/hw/sensorsecond.msm8226.so
 lib/libMiscTaAccessor.so
 lib/lib_asb_tee.so
 lib/libcamera_client.so
@@ -183,6 +187,7 @@ lib/libsysmon.so
 lib/libsysmon_idd.so
 lib/libsysmon_jni.so
 lib/libta.so
+lib/libyasalgo.so
 lib/sysmon/sysmon_batt_therm.so
 lib/sysmon/sysmon_charge_current_limit_level.so
 lib/sysmon/sysmon_charging.so
