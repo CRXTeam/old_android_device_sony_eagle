@@ -1,11 +1,11 @@
-From 53d4e682ce32b6aa9f8a7de4f9f7592bfe0a53dc Mon Sep 17 00:00:00 2001
-From: Cr3pT <cr3pt@crxteam.info>
-Date: Sat, 1 Nov 2014 13:50:01 +0100
-Subject: [PATCH] Fix build errors
-modified: drivers/media/platform/msm/vidc/msm_vidc_common.c
+From 0298d30e9a7670edcf1d0f061654b9f6c223365f Mon Sep 17 00:00:00 2001
+From: Jenkins <cr3pt@crxteam.info>
+Date: Sat, 1 Nov 2014 14:10:03 +0100
+Subject: [PATCH] Noth   
+modified: drivers/media/platform/msm/vidc/msm_vidc_common.c     
 modified: include/linux/msm_vidc_dec.h
 
-Change-Id: I46f6b373c72a05a7ef517509b52bf77d4d1e1059
+Change-Id: I2c4b6601a6b0f48ba1fcf9a8dc1e04e4e0d55e0e
 ---
  drivers/media/platform/msm/vidc/msm_vidc_common.c | 4 ++++
  include/linux/msm_vidc_dec.h                      | 1 +
