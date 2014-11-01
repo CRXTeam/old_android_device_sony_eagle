@@ -18,8 +18,8 @@
         "revision":    "cm-11.0"
     },
 	{
-        "remote":      "github",
-        "repository":  "M2Dev/android_kernel_sony_eagle",
+        "remote":      "CRX",
+        "repository":  "android_kernel_sony_eagle",
         "target_path": "kernel/sony/eagle",
         "revision":    "cm-11.0"
     },
