@@ -1,9 +1,9 @@
 From 53d4e682ce32b6aa9f8a7de4f9f7592bfe0a53dc Mon Sep 17 00:00:00 2001
 From: Cr3pT <cr3pt@crxteam.info>
 Date: Sat, 1 Nov 2014 13:50:01 +0100
-Subject: [PATCH] Fix build errors       modified:
- drivers/media/platform/msm/vidc/msm_vidc_common.c      modified:
- include/linux/msm_vidc_dec.h
+Subject: [PATCH] Fix build errors
+modified: drivers/media/platform/msm/vidc/msm_vidc_common.c
+modified: include/linux/msm_vidc_dec.h
 
 Change-Id: I46f6b373c72a05a7ef517509b52bf77d4d1e1059
 ---
