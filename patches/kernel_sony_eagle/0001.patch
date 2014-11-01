@@ -1,0 +1,42 @@
+From 53d4e682ce32b6aa9f8a7de4f9f7592bfe0a53dc Mon Sep 17 00:00:00 2001
+From: Cr3pT <cr3pt@crxteam.info>
+Date: Sat, 1 Nov 2014 13:50:01 +0100
+Subject: [PATCH] Fix build errors       modified:
+ drivers/media/platform/msm/vidc/msm_vidc_common.c      modified:
+ include/linux/msm_vidc_dec.h
+
+Change-Id: I46f6b373c72a05a7ef517509b52bf77d4d1e1059
+---
+ drivers/media/platform/msm/vidc/msm_vidc_common.c | 4 ++++
+ include/linux/msm_vidc_dec.h                      | 1 +
+ 2 files changed, 5 insertions(+)
+
+diff --git a/drivers/media/platform/msm/vidc/msm_vidc_common.c b/drivers/media/platform/msm/vidc/msm_vidc_common.c
+index 051f171..82ca240 100644
+--- a/drivers/media/platform/msm/vidc/msm_vidc_common.c
++++ b/drivers/media/platform/msm/vidc/msm_vidc_common.c
+@@ -1148,6 +1148,10 @@ static void handle_fbd(enum command_response cmd, void *data)
+                vb->v4l2_planes[0].reserved[3] = fill_buf_done->start_y_coord;
+                vb->v4l2_planes[0].reserved[4] = fill_buf_done->frame_width;
+                vb->v4l2_planes[0].reserved[5] = fill_buf_done->frame_height;
++               vb->v4l2_planes[0].reserved[6] =
++                       inst->prop.width[CAPTURE_PORT];
++               vb->v4l2_planes[0].reserved[7] =
++                       inst->prop.height[CAPTURE_PORT];
+                if (vb->v4l2_planes[0].data_offset > vb->v4l2_planes[0].length)
+                        dprintk(VIDC_INFO,
+                                "fbd:Overflow data_offset = %d; length = %d\n",
+diff --git a/include/linux/msm_vidc_dec.h b/include/linux/msm_vidc_dec.h
+index 35279bf..9301006 100644
+--- a/include/linux/msm_vidc_dec.h
++++ b/include/linux/msm_vidc_dec.h
+@@ -549,6 +549,7 @@ struct vdec_output_frameinfo {
+        enum vdec_picture pic_type;
+        void *client_data;
+        void *input_frame_clientdata;
++       struct vdec_picsize picsize;
+        struct vdec_framesize framesize;
+        enum vdec_interlaced_format interlaced_format;
+        struct vdec_aspectratioinfo aspect_ratio_info;
+--
+2.1.1
