@@ -1,0 +1,48 @@
+From b6304a2860f36d307820a00f8576b5b32a54e75f Mon Sep 17 00:00:00 2001
+From: zodex <mimirower45@wp.pl>
+Date: Thu, 13 Nov 2014 11:02:11 +0100
+Subject: [PATCH] 3st
+
+Change-Id: I03057f4b4c615b5a5c58b6fcc01d78980801a626
+---
+ camera/CameraWrapper.cpp | 24 ------------------------
+ 1 file changed, 24 deletions(-)
+
+diff --git a/camera/CameraWrapper.cpp b/camera/CameraWrapper.cpp
+index 008ddbf..65042fc 100644
+--- a/camera/CameraWrapper.cpp
++++ b/camera/CameraWrapper.cpp
+@@ -237,30 +237,6 @@ static char *camera_fixup_setparams(int id, const char *settings)
+         }
+     }
+ 
+-    if (params.get(android::CameraParameters::KEY_ISO_MODE)) {
+-        const char *isoMode = params.get(android::CameraParameters::KEY_ISO_MODE);
+-        if (strcmp(isoMode, "auto") != 0) {
+-            params.set(KEY_SONY_ISO_MODE, isoMode + 3);
+-        }
+-        if (params.get(KEY_SONY_AE_MODE_VALUES)) {
+-            const char *aeModes = params.get(KEY_SONY_AE_MODE_VALUES);
+-            if (strcmp(isoMode, "auto") == 0) {
+-                if ((strstr(aeModes, "auto") != NULL) &&
+-                    (strcmp(params.get(KEY_SONY_AE_MODE), "shutter-prio") != 0)) {
+-                    params.set(KEY_SONY_AE_MODE, "auto");
+-                }
+-            } else {
+-                if (strstr(aeModes, "iso-prio") != NULL) {
+-                    if (strcmp(params.get(KEY_SONY_AE_MODE), "shutter-prio") == 0) {
+-                        params.set(KEY_SONY_AE_MODE, "manual");
+-                    } else {
+-                        params.set(KEY_SONY_AE_MODE, "iso-prio");
+-                    }
+-                }
+-            }
+-        }
+-    }
+-
+     if (params.get(android::CameraParameters::KEY_SCENE_MODE)) {
+         const char *sceneMode = params.get(android::CameraParameters::KEY_SCENE_MODE);
+         if (strcmp(sceneMode, "hdr") == 0) {
+-- 
+1.8.3.2
+

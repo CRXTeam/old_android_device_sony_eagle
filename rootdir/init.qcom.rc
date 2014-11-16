@@ -68,7 +68,7 @@ on boot
     chown bluetooth bluetooth /dev/ttyHS0
     chmod 0660 /dev/ttyHS0
 
-    # Create QMUX deamon socket area
+    #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
     mkdir /dev/socket/qmux_audio 0770 media audio
@@ -111,7 +111,12 @@ on boot
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
 
+    # NFC
+    # Symlink for compability
+    symlink /dev/pn547 /dev/pn544
+
 on post-fs-data
+
     mkdir /data/media 0770 media_rw media_rw
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
@@ -275,7 +280,7 @@ service rmt_storage /system/bin/rmt_storage
     user root
 
 on property:ro.boot.emmc=true
- start rmt_storage
+    start rmt_storage
 
 service rfs_access /system/bin/rfs_access
    class core
@@ -323,7 +328,6 @@ service sensors /system/bin/sensors.qcom
     class main
     user root
     group root
-#    disabled
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
@@ -391,6 +395,48 @@ service dhcpcd_bt-pan /system/bin/dhcpcd -B -t 30
     disabled
     oneshot
 
+on property:crypto.driver.load=1
+     insmod /system/lib/modules/qce.ko
+     insmod /system/lib/modules/qcedev.ko
+
+on property:crypto.driver.load=0
+     exec /system/bin/rmmod qcedev.ko
+     exec /system/bin/rmmod qce.ko
+
+on property:drmdiag.load=1
+    start drmdiag
+
+on property:drmdiag.load=0
+    stop drmdiag
+
+service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
+    class late_start
+    user root
+    group root
+    oneshot
+    disabled
+
+service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
+    class late_start
+    group radio wifi inet
+    disabled
+    oneshot
+
+on property:persist.data.ds_fmc_app.mode=1
+    start ds_fmc_appd
+
+on property:ro.data.large_tcp_window_size=true
+    # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
+    write /proc/sys/net/ipv4/tcp_adv_win_scale  2
+
+service ril-daemon1 /system/bin/rild -c 1
+    class main
+    socket rild1 stream 660 root radio
+    socket rild-debug1 stream 660 radio system
+    user root
+    disabled
+    group radio cache inet misc audio sdcard_r sdcard_rw qcom_oncrpc diag qcom_diag log
+
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     class late_start
     user root
@@ -447,6 +493,10 @@ service time_daemon /system/bin/time_daemon
 service mpdecision /system/bin/mpdecision --avg_comp
    user root
    disabled
+
+service memsicd /system/bin/memsicd
+    class main
+    oneshot
 
 #start GNSS/Sensor interface daemon
 service gsiff_daemon /system/bin/gsiff_daemon

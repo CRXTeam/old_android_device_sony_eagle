@@ -16,6 +16,9 @@
 TARGET_SCREEN_HEIGHT := 960
 TARGET_SCREEN_WIDTH := 540
 
+# Torch
+PRODUCT_PACKAGES := \
+    Torch
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
@@ -31,4 +34,4 @@ PRODUCT_NAME := full_eagle
 PRODUCT_DEVICE := eagle
 PRODUCT_BRAND := Sony
 PRODUCT_MANUFACTURER := Sony
-PRODUCT_MODEL := Xperia M2 LTE
+PRODUCT_MODEL := Xperia M2LTE

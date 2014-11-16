@@ -1,0 +1,66 @@
+From 8aa0a8a447cc0a80b26b0ceb2ab1cb54cab1ed5a Mon Sep 17 00:00:00 2001
+From: zodex <mimirower45@wp.pl>
+Date: Thu, 13 Nov 2014 14:41:33 +0100
+Subject: [PATCH] 4st
+
+Change-Id: Iad0a1fa97805647a6f948a88c4568b7a4bc2dad4
+---
+ camera/CameraWrapper.cpp | 35 -----------------------------------
+ 1 file changed, 35 deletions(-)
+
+diff --git a/camera/CameraWrapper.cpp b/camera/CameraWrapper.cpp
+index 65042fc..c82d56c 100644
+--- a/camera/CameraWrapper.cpp
++++ b/camera/CameraWrapper.cpp
+@@ -153,7 +153,6 @@ static char *camera_fixup_getparams(int id, const char *settings)
+             }
+         }
+         sprintf(buffer, "%s,auto", buffer);
+-        params.set(android::CameraParameters::KEY_SUPPORTED_ISO_MODES, buffer);
+     }
+ 
+     if (params.get(KEY_SONY_IMAGE_STABILISER)) {
+@@ -169,40 +168,6 @@ static char *camera_fixup_getparams(int id, const char *settings)
+         params.set("video-hdr", params.get(KEY_SONY_VIDEO_HDR));
+     }
+ 
+-    if (params.get(KEY_SONY_ISO_MODE)) {
+-        if (params.get(KEY_SONY_AE_MODE_VALUES)) {
+-            const char *aeMode = params.get(KEY_SONY_AE_MODE);
+-            if (strcmp(aeMode, "auto") == 0 ) {
+-                params.set(android::CameraParameters::KEY_ISO_MODE, "auto");
+-                params.set("shutter-speed","auto");
+-            } else if (strcmp(aeMode, "iso-prio") == 0) {
+-                char *isoVal = (char*)malloc(sizeof(char)*
+-                        (3 + strlen(params.get(KEY_SONY_ISO_MODE))));
+-                sprintf(isoVal,"ISO%s",params.get(KEY_SONY_ISO_MODE));
+-                params.set(android::CameraParameters::KEY_ISO_MODE,isoVal);
+-                params.set("shutter-speed","auto");
+-            } else if (strcmp(aeMode, "shutter-prio") == 0) {
+-                params.set(android::CameraParameters::KEY_ISO_MODE, "auto");
+-                const char *shutterSpeed = params.get("sony-shutter-speed");
+-                if (shutterSpeed) {
+-                    params.set("shutter-speed",shutterSpeed);
+-                }
+-            } else if (strcmp(aeMode, "manual") == 0) {
+-                const char *shutterSpeed = params.get("sony-shutter-speed");
+-                if (shutterSpeed) {
+-                    params.set("shutter-speed",shutterSpeed);
+-                }
+-                char *isoVal = (char*)malloc(sizeof(char)*
+-                                        (3 + strlen(params.get(KEY_SONY_ISO_MODE))));
+-                sprintf(isoVal,"ISO%s",params.get(KEY_SONY_ISO_MODE));
+-                params.set(android::CameraParameters::KEY_ISO_MODE,isoVal);
+-            } else {
+-                params.set(android::CameraParameters::KEY_ISO_MODE, "auto");
+-                params.set("shutter-speed","auto");
+-            }
+-        }
+-    }
+-
+ #if !LOG_NDEBUG
+     ALOGV("%s: fixed parameters:", __FUNCTION__);
+     params.dump();
+-- 
+1.8.3.2
+
