@@ -7,6 +7,6 @@
   <project name="CyanogenMod/android_device_sony_qcom-common" path="device/sony/qcom-common" remote="github" revision="cm-12.0" />
   <project name="CyanogenMod/android_device_sony_common" path="device/sony/common" remote="github" revision="cm-12.0" />
   <project name="CRXTeam/android_kernel_sony_eagle" path="kernel/sony/eagle" remote="github" revision="cm-12.0" />
-  <project name="android-legacy/proprietary_vendor_sony" path="vendor/sony" remote="github" revision="cm-11.0" />
+  <project name="zodex/proprietary_vendor_sony" path="vendor/sony" remote="github" revision="cm-11.0" />
   <project name="android-legacy/proprietary_vendor_sony_eagle" path="vendor/sony/eagle" remote="github" revision="cm-11.0" />
 </manifest>
