@@ -28,9 +28,6 @@ TARGET_DTB_EXTRA_FLAGS := --force-v2
 # Hardware Features
 BOARD_HARDWARE_CLASS := device/sony/eagle/cmhw
 
-#TWRP
-DEVICE_RESOLUTION := 540x960
-
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/sony/eagle/bluetooth
 

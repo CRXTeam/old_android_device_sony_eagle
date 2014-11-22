@@ -1,9 +1,5 @@
 #!/bin/sh
 
-cd hardware/qcom/display-caf/msm8974
-git revert 2320051ca3d548dd23e2592583e55a2ca832410d
-cd ../../../..
-
 MYABSPATH=$(readlink -f "$0")
 PATCHBASE=$(dirname "$MYABSPATH")
 CMBASE=$(readlink -f "$PATCHBASE/../../../../")
