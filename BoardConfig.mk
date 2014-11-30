@@ -15,6 +15,8 @@
 # inherit from qcom-common
 include device/sony/msm8226-common/BoardConfigCommon.mk
 
+USE_CAMERA_STUB := true
+
 # Assert
 TARGET_OTA_ASSERT_DEVICE := D2302,D2303,D2305,D2306,eagle
 
@@ -31,7 +33,10 @@ BOARD_HARDWARE_CLASS := device/sony/eagle/cmhw
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/sony/eagle/bluetooth
 
-# Wifi
+# Camera
+COMMON_GLOBAL_CFLAGS += -DSONY_CAM_PARAMS
+
+# WiFi
 WLAN_MODULES:
 	mkdir -p $(KERNEL_MODULES_OUT)/pronto
 	mv $(KERNEL_MODULES_OUT)/wlan.ko $(KERNEL_MODULES_OUT)/pronto/pronto_wlan.ko
