@@ -52,6 +52,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/etc/thermal-engine-8226.conf:system/etc/thermal-engine-8226.conf
 
+# Device specific part for two-stage boot
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/bootrec-device:recovery/bootrec-device
+
+# Somehow the symlink to charger is dangling and cannot be used
+PRODUCT_COPY_FILES += \
+$(LOCAL_PATH)/rootdir/charger:recovery/root/charger
+
 # Sbin
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/charger:root/charger \
