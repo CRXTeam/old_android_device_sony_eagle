@@ -16,6 +16,9 @@
 TARGET_SCREEN_HEIGHT := 960
 TARGET_SCREEN_WIDTH := 540
 
+# Lightbulb
+PRODUCT_PACKAGES := \
+    Lightbulb
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
@@ -32,3 +35,4 @@ PRODUCT_DEVICE := eagle
 PRODUCT_BRAND := Sony
 PRODUCT_MANUFACTURER := Sony
 PRODUCT_MODEL := Xperia M2 LTE
+

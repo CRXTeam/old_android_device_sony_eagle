@@ -15,6 +15,8 @@
 #
 
 on early-init
+    mkdir /firmware 0771 system system
+    symlink /data/tombstones /tombstones
     chmod 666 /proc/cmdline
 
 on init
@@ -44,7 +46,10 @@ on fs
     chmod 0555 /lta-label
 
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+
+    # Set RIL props based on model
+    exec /system/bin/sh /system/etc/init.qcom.baseband.sh
 
     # TA support
     class_start trimarea
@@ -119,27 +124,10 @@ on boot
     chown system system /sys/class/leds/lcd-backlight/brightness
     chown system system /sys/class/leds/button-backlight/brightness
     chown system system /sys/class/leds/jogball-backlight/brightness
-    #S:EllenLu 20140123 ,[LED]add for SOMC Illumination
-    #chown system system /sys/class/leds/red/brightness
-    #chown system system /sys/class/leds/green/brightness
-    #chown system system /sys/class/leds/blue/brightness
     chown root system /sys/class/leds/rgb_red/brightness
     chown root system /sys/class/leds/rgb_green/brightness
     chown root system /sys/class/leds/rgb_blue/brightness
-    #chown root system /sys/class/leds/rgb_red/flashmode
-    #chown root system /sys/class/leds/rgb_green/flashmode
-    #chown root system /sys/class/leds/rgb_blue/flashmode
-    #chown root system /sys/class/leds/rgb_red/onms
-    #chown root system /sys/class/leds/rgb_green/onms
-    #chown root system /sys/class/leds/rgb_blue/onms
-    #chown root system /sys/class/leds/rgb_red/offms
-    #chown root system /sys/class/leds/rgb_green/offms
-    #chown root system /sys/class/leds/rgb_blue/offms
-    #chown root system /sys/class/leds/rgb_red/tunebrightness
-    #chown root system /sys/class/leds/rgb_green/tunebrightness
-    #chown root system /sys/class/leds/rgb_blue/tunebrightness
 
-    # Mike, remove Ellen's patch, using Qcom's original design.
     chown root system /sys/class/leds/rgb_red/blink
     chown root system /sys/class/leds/rgb_red/duty_pcts
     chown root system /sys/class/leds/rgb_red/ramp_step_ms
@@ -159,8 +147,6 @@ on boot
     chown root system /sys/class/illumination/6
     chown root system /sys/class/illumination/7
     chown root system /sys/class/illumination/8
-    #E:EllenLu 20140123 ,[LED]add for SOMC Illumination
-    # Mike, temp for all R/W permission for T1/T2
     chmod 0664 /sys/class/leds/rgb_red/brightness
     chmod 0664 /sys/class/leds/rgb_green/brightness
     chmod 0664 /sys/class/leds/rgb_blue/brightness
@@ -185,9 +171,7 @@ on boot
     chmod 0664 /sys/class/illumination/6
     chmod 0664 /sys/class/illumination/7
     chmod 0664 /sys/class/illumination/8
-    # Mike, end, temp for T1/T2
 
-    # S [CCI] Geomagnetic YAS533 iio
     chown system system /dev/iio:device0
     chown system system /sys/bus/iio/devices/iio:device0/hard_offset
     chown system system /sys/bus/iio/devices/iio:device0/sampling_frequency
@@ -208,10 +192,8 @@ on boot
     chmod 666 /data/system/yas.cfg
     write /data/system/yas.cfg "200,300,500,30,20,15,1,1,1,10872,166,113,376,8812,-118,340,-718,10451"
 
-    # [CCI] MEMSIC sensor
     mkdir /data/misc/sensors 0777 system system
 
-    #add for stk3x1x
     chown system system /sys/class/input/input0/driver/enable
     chown system system /sys/class/input/input1/driver/enable
     chown system system /sys/class/input/input0/driver/delay

@@ -2,6 +2,7 @@
 # system.prop for eagle
 #
 
+rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
 persist.rild.nitz_plmn=
 persist.rild.nitz_long_ons_0=
@@ -13,19 +14,95 @@ persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 
-ro.sf.lcd_density=220
+ro.telephony.default_network=9
+telephony.lteOnCdmaDevice=0
+telephony.lteOnGsmDevice=1
+persist.radio.apm_sim_not_pwdn=1
+persist.radio.add_power_save=1
+persist.radio.mode_pref_nv10=1
+ro.telephony.call_ring.multiple=0
+persist.data.netmgrd.qos.enable=false
+persist.radio.snapshot_enabled=1
+persist.radio.snapshot_timer=2
 
-# Sensors
+#system props for the MM modules
 
-ro.qualcomm.sensors.qmd=true
-debug.qualcomm.sns.hal=w
-ro.qc.sdk.sensors.gestures=false
-ro.qc.sensors.max_accel_rate=false
-ro.qc.sensors.max_gyro_rate=false
-ro.qc.sensors.max_mag_rate=false
-ro.qc.sensors.smgr_mag_cal_en=true
-ro.qualcomm.sensors.pedometer=false
-ro.qualcomm.sensors.pam=false
-ro.qualcomm.sensors.scrn_ortn=false
-ro.qualcomm.sensors.georv=true
-ro.qualcomm.sensors.smd=sony
+media.stagefright.enable-player=true
+media.stagefright.enable-http=true
+media.stagefright.enable-aac=true
+media.stagefright.enable-qcp=true
+media.stagefright.enable-fma2dp=true
+media.stagefright.enable-scan=true
+mmp.enable.3g2=true
+mm.enable.smoothstreaming=true
+
+#9273 is decimal sum of supported codecs in AAL
+#codecs:(PARSER_)AVI AC3 ASF AAC QCP DTS 3G2 MP2TS
+mm.enable.qcom_parser=37491
+
+# VIDC: debug_levels
+# 1:ERROR 2:HIGH 4:LOW 0:NOlogs 7:AllLogs
+vidc.debug.level=1
+#
+# system props for the data modules
+#
+ro.use_data_netmgrd=true
+persist.data.netmgrd.qos.enable=true
+
+#system props for time-services
+persist.timed.enable=true
+
+#
+#snapdragon value add features
+#
+ro.qc.sdk.audio.ssr=false
+##fluencetype can be "fluence" or "fluencepro" or "none"
+ro.qc.sdk.audio.fluencetype=none
+persist.audio.fluence.voicecall=true
+persist.audio.fluence.voicerec=false
+persist.audio.fluence.speaker=true
+
+# Enable/disable cabl
+ro.qualcomm.cabl=1
+
+# system prop for NFC DT
+ro.nfc.port=I2C
+
+# property to enable/disable feature EAP-SIM/AKA
+ro.wifi.eap_sim_enabled=true
+
+#property to enable user to access Google WFD settings
+persist.debug.wfd.enable=1
+##property to choose between virtual/external wfd display
+persist.sys.wfd.virtual=0
+tunnel.audio.encode = true
+
+#use VERY_HIGH_QUALITY for audio resampler
+af.resampler.quality=4
+
+#Buffer size in kbytes for compress offload playback
+audio.offload.buffer.size.kb=32
+
+#Enable offload audio video playback by default
+av.offload.enable=false
+audio.offload.disable=1
+
+#enable voice path for PCM VoIP by default
+use.voice.path.for.pcm.voip=true
+
+#enable dsp gapless mode by default
+audio.offload.gapless.enabled=true
+
+#Eagle is reusing the software solution from Xperia Z (Yuga), in Eagle the tunnel decoding must be disabled
+tunnel.decode=false
+
+# [VY5X] [Bug#1789] ph_yen DMS05280088 - [So]ASIA-IN-DL: SIM2 network search shows incorrect results
+persist.radio.sim1.networkname=empty
+persist.radio.sim2.networkname=empty
+
+# [VY53][Bug1434][DMS03993317][So] ASIA-AU: Emergency calls only is not displayed either for SIM1 or SIM2, instead No Service is displayed
+persist.radio.sim1.callable=false
+persist.radio.sim2.callable=false
+
+ro.cci.flex_version=FF_SHP_VY52.0.0.0001
+
