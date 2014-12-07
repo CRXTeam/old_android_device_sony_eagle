@@ -11,25 +11,25 @@
         "target_path": "device/sony/common",
         "revision":    "cm-11.0"
     },
-	{
+    {
         "remote":      "github",
         "repository":  "CyanogenMod/android_device_qcom_common",
         "target_path": "device/qcom/common",
         "revision":    "cm-11.0"
     },
-	{
+    {
         "remote":      "github",
         "repository":  "zodex/android_device_sony_msm8226-common",
         "target_path": "device/sony/msm8226-common",
         "revision":    "kitkat"
     },
-	{
+    {
         "remote":      "CRX",
         "repository":  "android_kernel_sony_eagle",
         "target_path": "kernel/sony/eagle",
         "revision":    "cm-11.0"
     },
-	{
+    {
         "remote":      "github",
         "repository":  "android-legacy/proprietary_vendor_sony",
         "target_path": "vendor/sony",
