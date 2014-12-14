@@ -27,7 +27,7 @@
         "remote":      "github",
         "repository":  "android-legacy/android_kernel_sony_eagle",
         "target_path": "kernel/sony/eagle",
-        "revision":    "android-4.4"
+        "revision":    "cm-11.0"
     },
     {
         "remote":      "github",
