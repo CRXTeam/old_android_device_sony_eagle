@@ -27,7 +27,7 @@
         "remote":      "github",
         "repository":  "android-legacy/android_kernel_caf_msm8x26",
         "target_path": "kernel/sony/eagle",
-        "revision":    "kitkat"
+        "revision":    "kk-sb"
     },
     {
         "remote":      "github",
